@@ -1,13 +1,31 @@
 # Project Euler --> https://projecteuler.net/problem=2
 # Problem 2 : Even Fibonacci numbers
 # Find the sum of the even-valued terms of Fibonacci sequence whose values do not exceed four million.
-fib = [1,2]
-fib_even = [2]
-last = 0
-while last < 4000000:
-    last = fib[-1] + fib[-2]
-    fib.append(last)
-    if last % 2 == 0 and last < 4000000:
-        fib_even.append(last)
+# Updated Faster solution
+#0, 1, 1, 2, 3, 5, 8, 13, 21, 34
+# We will be using tuple and swaping the variables to same storage and time
+# I am trying to improve my code to get a faster result and saving storage by using a tuple and swaping variables
+import time
+start_time = time.time()
 
-print(sum(fib_even))
+def fibEvenSum():
+    i = 2
+    sumEvenValues = 0
+    fib1,fib2 = (0,1)
+    nextValue = 0
+    while (nextValue < 4000000):
+        nextValue = fib1+ fib2
+        fib1,fib2 = (fib2,nextValue)
+        
+        if nextValue % 2 == 0:
+            sumEvenValues += nextValue
+        
+        i += 1
+    return sumEvenValues
+
+
+print(fibEvenSum())
+        
+
+# answer needs to be 4613732
+# My program took 0.00033664703369140625 to run
